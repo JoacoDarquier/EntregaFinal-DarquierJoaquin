@@ -5,10 +5,12 @@ from app.forms import UserRegistrationForm
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
+
 
 def index(request):
     return render(request, 'index.html')
@@ -26,7 +28,7 @@ def registrar(request):
     form = UserRegistrationForm(request.POST)
     return render (request, "registro.html", {"form": form})
 
-def login(request):
+def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data = request.POST)
         if form.is_valid():
@@ -48,25 +50,26 @@ def login(request):
     return render(request, "login.html", {"form": form})
 
 #CRUD Arquero
-class ArqueroList (ListView):
+
+class ArqueroList (LoginRequiredMixin, ListView):
     model = Arquero
     template_name = 'arqueros_list.html'
 
-class ArqueroCreacion (CreateView):
+class ArqueroCreacion (LoginRequiredMixin, CreateView):
     model = Arquero
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'create_arquero.html'
     success_url = "/yo-jugador/arquero/list"
 
-class ArqueroDetalle (DetailView):
+class ArqueroDetalle (LoginRequiredMixin, DetailView):
     model = Arquero
     template_name = 'arquero_detalle.html'
 
-class ArqueroDelete (DeleteView):
+class ArqueroDelete (LoginRequiredMixin, DeleteView):
     model = Arquero
     template_name = 'arquero_confirm_delete.html'
 
-class ArqueroEditar (UpdateView):
+class ArqueroEditar (LoginRequiredMixin, UpdateView):
     model = Arquero
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'arquero_editar.html'
@@ -74,25 +77,26 @@ class ArqueroEditar (UpdateView):
 
 
 #CRUD Defensor
-class DefensorList (ListView):
+
+class DefensorList (LoginRequiredMixin, ListView):
     model = Defensor
     template_name = 'defensores_list.html'
 
-class DefensorCreacion (CreateView):
+class DefensorCreacion (LoginRequiredMixin, CreateView):
     model = Defensor
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'defensor_create.html'
     success_url = "/yo-jugador/defensor/list"
 
-class DefensorDetalle (DetailView):
+class DefensorDetalle (LoginRequiredMixin, DetailView):
     model = Defensor
     template_name = 'defensor_detalle.html'
 
-class DefensorDelete (DeleteView):
+class DefensorDelete (LoginRequiredMixin, DeleteView):
     model = Defensor
     template_name = 'defensor_confirm_delete.html'
 
-class DefensorEditar (UpdateView):
+class DefensorEditar (LoginRequiredMixin, UpdateView):
     model = Defensor
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'defensor_editar.html'
@@ -100,25 +104,26 @@ class DefensorEditar (UpdateView):
 
 
 #CRUD Mediocampista
-class MediocampistaList (ListView):
+
+class MediocampistaList (LoginRequiredMixin, ListView):
     model = Mediocampista
     template_name = 'mediocampistas_list.html'
 
-class MediocampistaCreacion (CreateView):
+class MediocampistaCreacion (LoginRequiredMixin, CreateView):
     model = Mediocampista
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'mediocampista_create.html'
     success_url = "/yo-jugador/mediocampista/list"
 
-class MediocampistaDetalle (DetailView):
+class MediocampistaDetalle (LoginRequiredMixin, DetailView):
     model = Mediocampista
     template_name = 'mediocampista_detalle.html'
 
-class MediocampistaDelete (DeleteView):
+class MediocampistaDelete (LoginRequiredMixin, DeleteView):
     model = Mediocampista
     template_name = 'mediocampista_confirm_delete.html'
 
-class MediocampistaEditar (UpdateView):
+class MediocampistaEditar (LoginRequiredMixin, UpdateView):
     model = Mediocampista
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'mediocampista_editar.html'
@@ -126,25 +131,26 @@ class MediocampistaEditar (UpdateView):
 
 
 #CRUD Delantero
-class DelanteroList (ListView):
+
+class DelanteroList (LoginRequiredMixin, ListView):
     model = Delantero
     template_name = 'delanteros_list.html'
 
-class DelanteroCreacion (CreateView):
+class DelanteroCreacion (LoginRequiredMixin, CreateView):
     model = Delantero
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'delantero_create.html'
     success_url = "/yo-jugador/delantero/list"
 
-class DelanteroDetalle (DetailView):
+class DelanteroDetalle (LoginRequiredMixin, DetailView):
     model = Delantero
     template_name = 'delantero_detalle.html'
 
-class DelanteroDelete (DeleteView):
+class DelanteroDelete (LoginRequiredMixin, DeleteView):
     model = Delantero
     template_name = 'delantero_confirm_delete.html'
 
-class DelanteroEditar (UpdateView):
+class DelanteroEditar (LoginRequiredMixin, UpdateView):
     model = Delantero
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'delantero_editar.html'

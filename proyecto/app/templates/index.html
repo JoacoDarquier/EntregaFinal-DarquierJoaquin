@@ -11,17 +11,22 @@
     </head>
     <body>
         <nav class="navbar navbar-light bg-light static-top">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'ArqueroList' %}">Arquero</a>
+            <a class="nav-link" href="{% url 'DefensorList' %}">Defensor</a>
+            <a class="nav-link" href="{% url 'MediocampistaList' %}">Mediocampista</a>
+            <a class="nav-link" href="{% url 'DelanteroList' %}">Delantero</a>
+			<form method="post" action="{% url 'Logout' %}">{% csrf_token %}
+			    <button type="submit">
+                    Cerrar Sesion
+                </button>
+            </form>
+            {% else %}
             <div class="container">
-                <a class="nav-link" href="{% url 'ArqueroList' %}">Arquero</a>
-                <a class="nav-link" href="{% url 'DefensorList' %}">Defensor</a>
-                <a class="nav-link" href="{% url 'MediocampistaList' %}">Mediocampista</a>
-                <a class="nav-link" href="{% url 'DelanteroList' %}">Delantero</a>
-            
-                {% if request.user.is_authenticated %}
-			    <form method="post" action="{% url 'Logout' %}">
-			    {% csrf_token %}
-			    <button type="submit">Cerrar Sesion</button>
-                {% else %}
+                <a class="nav-link" href="{% url 'login' %}">Arquero</a>
+                <a class="nav-link" href="{% url 'login' %}">Defensor</a>
+                <a class="nav-link" href="{% url 'login' %}">Mediocampista</a>
+                <a class="nav-link" href="{% url 'login' %}">Delantero</a>
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
@@ -35,11 +40,9 @@
                         </div>
                     </div>
                 </div>
-		        {% endif %} 
             </div>
+            {% endif %} 
         </nav>
-    
-
     <footer class="footer bg-light">
         <h1>hola mundo</h1>
     </footer>
