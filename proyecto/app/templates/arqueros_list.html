@@ -12,7 +12,9 @@
             <p>Nombre: {{arquero.nombre}}</p>
             <p>
                 <a href="{% url 'ArqueroDetalle' arquero.id %}">Ver</a>
+                {% if user.id == arquero.id %}
                 <a href="{% url 'ArqueroEditar' arquero.id %}">Editar</a>
+                {% endif %}
                 <a href="{% url 'ArqueroDelete' arquero.id %}">Borrar</a>
                 
             </p>

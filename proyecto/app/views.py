@@ -11,6 +11,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 
+from django.core.exceptions import PermissionDenied
+
+
 
 def index(request):
     return render(request, 'index.html')
@@ -68,12 +71,19 @@ class ArqueroDetalle (LoginRequiredMixin, DetailView):
 class ArqueroDelete (LoginRequiredMixin, DeleteView):
     model = Arquero
     template_name = 'arquero_confirm_delete.html'
+    success_url = "/yo-jugador/arquero/list"
 
 class ArqueroEditar (LoginRequiredMixin, UpdateView):
     model = Arquero
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'arquero_editar.html'
-    success_url = "/app/arquero/list"
+    success_url = "/yo-jugador/arquero/list"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.usuario != self.request.user:
+            raise PermissionDenied("No tienes permiso para editar este objeto.")
+        return obj
 
 
 #CRUD Defensor
@@ -102,6 +112,12 @@ class DefensorEditar (LoginRequiredMixin, UpdateView):
     template_name = 'defensor_editar.html'
     success_url = "/yo-jugador/defensor/list"
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.usuario != self.request.user:
+            raise PermissionDenied("No tienes permiso para editar este objeto.")
+        return obj
+
 
 #CRUD Mediocampista
 
@@ -129,6 +145,12 @@ class MediocampistaEditar (LoginRequiredMixin, UpdateView):
     template_name = 'mediocampista_editar.html'
     success_url = "/yo-jugador/mediocampista/list"
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.usuario != self.request.user:
+            raise PermissionDenied("No tienes permiso para editar este objeto.")
+        return obj
+
 
 #CRUD Delantero
 
@@ -155,4 +177,11 @@ class DelanteroEditar (LoginRequiredMixin, UpdateView):
     fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'delantero_editar.html'
     success_url = "/yo-jugador/delantero/list"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        if obj.usuario != self.request.user:
+            raise PermissionDenied("No tienes permiso para editar este objeto.")
+        return obj
+
 
