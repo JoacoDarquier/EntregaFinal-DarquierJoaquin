@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defensores</title>
+</head>
+<body>
+    <ul>
+        {% for defensor in object_list %}
+        <li>
+            <p>Nombre: {{defensor.nombre}}</p>
+            <p>
+                <a href="{% url 'DefensorDetalle' defensor.id %}">Ver</a>
+                <a href="{% url 'DefensorEditar' defensor.id %}">Editar</a>
+                <a href="{% url 'DefensorDelete' defensor.id %}">Borrar</a>
+                
+            </p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'DefensorCreacion' %}">Crear</a>
+</body>
+</html>

@@ -11,14 +11,14 @@
         <li>
             <p>Nombre: {{arquero.nombre}}</p>
             <p>
-                <a href="{% url 'Detail' arquero.id %}">Ver</a>
-                <a href="{% url 'Edit' arquero.id %}">Editar</a>
-                <a href="{% url 'Delete' arquero.id %}">Borrar</a>
+                <a href="{% url 'ArqueroDetalle' arquero.id %}">Ver</a>
+                <a href="{% url 'ArqueroEditar' arquero.id %}">Editar</a>
+                <a href="{% url 'ArqueroDelete' arquero.id %}">Borrar</a>
                 
             </p>
         </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'New' %}">Crear</a>
+    <a href="{% url 'ArqueroCreacion' %}">Crear</a>
 </body>
 </html>

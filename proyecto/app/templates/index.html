@@ -12,10 +12,10 @@
     <body>
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="nav-link" href="#">Arquero</a>
-                <a class="nav-link" href="#">Defensor</a>
-                <a class="nav-link" href="#">Mediocampista</a>
-                <a class="nav-link" href="#">Delantero</a>
+                <a class="nav-link" href="{% url 'ArqueroList' %}">Arquero</a>
+                <a class="nav-link" href="{% url 'DefensorList' %}">Defensor</a>
+                <a class="nav-link" href="{% url 'MediocampistaList' %}">Mediocampista</a>
+                <a class="nav-link" href="{% url 'DelanteroList' %}">Delantero</a>
             
                 {% if request.user.is_authenticated %}
 			    <form method="post" action="{% url 'Logout' %}">

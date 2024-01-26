@@ -47,14 +47,14 @@ def login(request):
     form = AuthenticationForm()
     return render(request, "login.html", {"form": form})
 
+#CRUD Arquero
 class ArqueroList (ListView):
     model = Arquero
     template_name = 'arqueros_list.html'
 
-
 class ArqueroCreacion (CreateView):
     model = Arquero
-    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'create_arquero.html'
     success_url = "/yo-jugador/arquero/list"
 
@@ -68,6 +68,85 @@ class ArqueroDelete (DeleteView):
 
 class ArqueroEditar (UpdateView):
     model = Arquero
-    fields = ['pie_habil', 'cant_clubes', 'telefono', 'estatura', 'email',]
+    fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
     template_name = 'arquero_editar.html'
     success_url = "/app/arquero/list"
+
+
+#CRUD Defensor
+class DefensorList (ListView):
+    model = Defensor
+    template_name = 'defensores_list.html'
+
+class DefensorCreacion (CreateView):
+    model = Defensor
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    template_name = 'defensor_create.html'
+    success_url = "/yo-jugador/defensor/list"
+
+class DefensorDetalle (DetailView):
+    model = Defensor
+    template_name = 'defensor_detalle.html'
+
+class DefensorDelete (DeleteView):
+    model = Defensor
+    template_name = 'defensor_confirm_delete.html'
+
+class DefensorEditar (UpdateView):
+    model = Defensor
+    fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
+    template_name = 'defensor_editar.html'
+    success_url = "/yo-jugador/defensor/list"
+
+
+#CRUD Mediocampista
+class MediocampistaList (ListView):
+    model = Mediocampista
+    template_name = 'mediocampistas_list.html'
+
+class MediocampistaCreacion (CreateView):
+    model = Mediocampista
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    template_name = 'mediocampista_create.html'
+    success_url = "/yo-jugador/mediocampista/list"
+
+class MediocampistaDetalle (DetailView):
+    model = Mediocampista
+    template_name = 'mediocampista_detalle.html'
+
+class MediocampistaDelete (DeleteView):
+    model = Mediocampista
+    template_name = 'mediocampista_confirm_delete.html'
+
+class MediocampistaEditar (UpdateView):
+    model = Mediocampista
+    fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
+    template_name = 'mediocampista_editar.html'
+    success_url = "/yo-jugador/mediocampista/list"
+
+
+#CRUD Delantero
+class DelanteroList (ListView):
+    model = Delantero
+    template_name = 'delanteros_list.html'
+
+class DelanteroCreacion (CreateView):
+    model = Delantero
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    template_name = 'delantero_create.html'
+    success_url = "/yo-jugador/delantero/list"
+
+class DelanteroDetalle (DetailView):
+    model = Delantero
+    template_name = 'delantero_detalle.html'
+
+class DelanteroDelete (DeleteView):
+    model = Delantero
+    template_name = 'delantero_confirm_delete.html'
+
+class DelanteroEditar (UpdateView):
+    model = Delantero
+    fields = ['pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email',]
+    template_name = 'delantero_editar.html'
+    success_url = "/yo-jugador/delantero/list"
+
