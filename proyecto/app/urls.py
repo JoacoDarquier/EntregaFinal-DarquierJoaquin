@@ -23,6 +23,7 @@ from app.views import (
     DelanteroDetalle,
     DelanteroEditar,
     DelanteroDelete,
+    avatar,
     index)
 
 urlpatterns = [
@@ -53,6 +54,8 @@ urlpatterns = [
     path('detalle-delantero/<pk>', DelanteroDetalle.as_view(), name = 'DelanteroDetalle'),
     path('editar-delantero/<pk>', DelanteroEditar.as_view(), name = 'DelanteroEditar'),
     path('borrar-delantero/<pk>', DelanteroDelete.as_view(), name = 'DelanteroDelete'),
+    #Avartar del usuario
+    path('avatar', avatar, name='avatar'),
     path('', index, name = 'index'),
 ]
 

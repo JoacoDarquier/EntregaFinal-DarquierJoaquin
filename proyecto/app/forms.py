@@ -55,3 +55,5 @@ class UserRegistrationForm (UserCreationForm):
         model = User
         fields = ['last_name', 'first_name', 'username', 'email', 'password1', 'password2']
 
+class AvatarFormulario(forms.Form):
+    image = forms.ImageField()

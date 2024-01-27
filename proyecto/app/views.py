@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from app.models import *
-from app.forms import UserRegistrationForm
+from app.forms import UserRegistrationForm, AvatarFormulario
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
-
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 
 
@@ -53,7 +53,6 @@ def login_request(request):
     return render(request, "login.html", {"form": form})
 
 #CRUD Arquero
-
 class ArqueroList (LoginRequiredMixin, ListView):
     model = Arquero
     template_name = 'arqueros_list.html'
@@ -87,7 +86,6 @@ class ArqueroEditar (LoginRequiredMixin, UpdateView):
 
 
 #CRUD Defensor
-
 class DefensorList (LoginRequiredMixin, ListView):
     model = Defensor
     template_name = 'defensores_list.html'
@@ -120,7 +118,6 @@ class DefensorEditar (LoginRequiredMixin, UpdateView):
 
 
 #CRUD Mediocampista
-
 class MediocampistaList (LoginRequiredMixin, ListView):
     model = Mediocampista
     template_name = 'mediocampistas_list.html'
@@ -153,7 +150,6 @@ class MediocampistaEditar (LoginRequiredMixin, UpdateView):
 
 
 #CRUD Delantero
-
 class DelanteroList (LoginRequiredMixin, ListView):
     model = Delantero
     template_name = 'delanteros_list.html'
@@ -184,4 +180,38 @@ class DelanteroEditar (LoginRequiredMixin, UpdateView):
             raise PermissionDenied("No tienes permiso para editar este objeto.")
         return obj
 
+
+@login_required
+def avatar (request):
+    if request.method == "POST":
+        formulario = AvatarFormulario(request.POST, request.FILES)
+        if formulario.is_valid():
+            user = User.objects.get(username=request.user)
+            avatar = Avatar(user=user,image=formulario.cleaned_data.get("image"))
+            avatar.save()
+            return render(request, 'index.html')
+    formulario = AvatarFormulario()
+
+    return render (request, 'usuario_avatar.html', {'formulario' : formulario})
+
+
+'''def avatar(request):
+    if request.method == "POST":
+        print("avatar - POST")
+        formulario = AvatarFormulario(request.POST, request.FILES)
+        if formulario.is_valid():
+            print("avatar - Is_Valid!")
+            user = request.user
+            avatar = Avatar.objects.filter(user=user).first()
+            if avatar:
+                avatar.delete()
+            avatar = Avatar.objects.create(user=user, image=formulario.cleaned_data.get("image"))
+
+            print("avatar - Success!")
+            avatar = Avatar.objects.get_or_create(user=user)[0]
+            if avatar.image:
+                request.session['avatar_url'] = avatar.image.url
+            return redirect('index')
+    formulario = AvatarFormulario()
+    return render(request, 'usuario_avatar.html', {"form": formulario})'''
 

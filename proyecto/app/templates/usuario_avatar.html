@@ -1,0 +1,10 @@
+{% extends 'index.html' %} 
+{% load static %} 
+{% block cambioDeVista %}
+<form action="{% url 'avatar' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+    <table>
+        {{formulario.as_p}}
+    </table>
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
