@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion del Delantero</title>
-</head>
-<body>
-    <p>Nombre del Delantero: {{delantero.nombre}} </p>
-    <a href="{% url 'DelanteroList' %}">Regresar</a>
-</body>
-</html>
+{% extends 'index.html' %} 
+{% load static %} 
+{% block cambioDeVista %}
+<p>Nombre del Delantero: {{delantero.nombre}} </p>
+<a href="{% url 'DelanteroList' %}">Regresar</a>
+{% endblock %}

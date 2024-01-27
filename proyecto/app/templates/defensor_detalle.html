@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion del Defensor</title>
-</head>
-<body>
-    <p>Nombre del Defensor: {{defensor.nombre}} </p>
-    <a href="{% url 'DefensorList' %}">Regresar</a>
-</body>
-</html>
+{% extends 'index.html' %} 
+{% load static %} 
+{% block cambioDeVista %}
+<p>Nombre del Defensor: {{defensor.nombre}} </p>
+<a href="{% url 'DefensorList' %}">Regresar</a>
+{% endblock %}

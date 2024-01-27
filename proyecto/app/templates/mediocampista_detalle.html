@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion del Mediocampista</title>
-</head>
-<body>
-    <p>Nombre del Mediocampista: {{mediocampista.nombre}} </p>
-    <a href="{% url 'MediocampistaList' %}">Regresar</a>
-</body>
-</html>
+{% extends 'index.html' %} 
+{% load static %} 
+{% block cambioDeVista %}
+<p>Nombre del Mediocampista: {{mediocampista.nombre}} </p>
+<a href="{% url 'MediocampistaList' %}">Regresar</a>
+{% endblock %}
