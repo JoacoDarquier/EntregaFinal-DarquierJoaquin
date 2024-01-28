@@ -7,7 +7,7 @@ def calcular_fecha_nacimiento_predeterminada():
     return timezone.now() - timedelta(days=365*25)
 
 class Jugador (models.Model):
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     nombre = models.CharField(max_length=20)
     apellido = models.CharField(max_length=20)
     pie_habil = models.CharField(max_length=20)
@@ -24,16 +24,17 @@ class Jugador (models.Model):
         return f"{self.nombre}, {self.apellido}"
 
 class Arquero (Jugador):
-    pass
+    descripcion = models.CharField(max_length=300)
+    
 
 class Defensor (Jugador):
-    pass
+    descripcion = models.CharField(max_length=300)
 
 class Mediocampista (Jugador):
-    pass
+    descripcion = models.CharField(max_length=300)
 
 class Delantero (Jugador):
-    pass
+    descripcion = models.CharField(max_length=300)
 
 class Avatar (models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)

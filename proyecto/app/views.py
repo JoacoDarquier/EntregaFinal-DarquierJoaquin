@@ -1,16 +1,18 @@
 from django.shortcuts import render
 
-from app.models import *
-from app.forms import UserRegistrationForm, AvatarFormulario
+from app.models import Arquero, Defensor, Mediocampista, Delantero
 
-from django.contrib.auth.forms import AuthenticationForm
+from app.forms import UserRegistrationForm, AvatarFormulario, ArqueroFormulario
+
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
+from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
-from django.contrib.auth.decorators import login_required
+
 from django.core.exceptions import PermissionDenied
 
 
@@ -62,6 +64,18 @@ class ArqueroCreacion (LoginRequiredMixin, CreateView):
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'create_arquero.html'
     success_url = "/yo-jugador/arquero/list"
+
+'''def arquero_create(request):
+    if request.method == 'POST':
+        form = ArqueroFormulario(request.POST, request.FILES)
+        if form.is_valid():
+            arquero = form.save(commit=False)
+            arquero.usuario = request.user
+            arquero.save()
+            return redirect('index')
+    else:
+        form = ArqueroFormulario()
+    return render(request, 'create_arquero.html', {'form': form})'''
 
 class ArqueroDetalle (LoginRequiredMixin, DetailView):
     model = Arquero
