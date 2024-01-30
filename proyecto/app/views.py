@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from app.models import Arquero, Defensor, Mediocampista, Delantero, Avatar 
 
@@ -115,6 +115,10 @@ class DefensorCreacion (LoginRequiredMixin, CreateView):
     template_name = 'defensor_create.html'
     success_url = "/yo-jugador/defensor/list"
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
 class DefensorDetalle (LoginRequiredMixin, DetailView):
     model = Defensor
     template_name = 'defensor_detalle.html'
@@ -146,6 +150,10 @@ class MediocampistaCreacion (LoginRequiredMixin, CreateView):
     fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
     template_name = 'mediocampista_create.html'
     success_url = "/yo-jugador/mediocampista/list"
+
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
 
 class MediocampistaDetalle (LoginRequiredMixin, DetailView):
     model = Mediocampista
@@ -179,6 +187,10 @@ class DelanteroCreacion (LoginRequiredMixin, CreateView):
     template_name = 'delantero_create.html'
     success_url = "/yo-jugador/delantero/list"
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
 class DelanteroDetalle (LoginRequiredMixin, DetailView):
     model = Delantero
     template_name = 'delantero_detalle.html'
@@ -200,7 +212,7 @@ class DelanteroEditar (LoginRequiredMixin, UpdateView):
         return obj
 
 
-@login_required
+'''@login_required
 def avatar (request):
     if request.method == "POST":
         formulario = AvatarFormulario(request.POST, request.FILES)
@@ -211,10 +223,10 @@ def avatar (request):
             return render(request, 'index.html')
     formulario = AvatarFormulario()
 
-    return render (request, 'usuario_avatar.html', {'formulario' : formulario})
+    return render (request, 'usuario_avatar.html', {'formulario' : formulario})'''
 
 
-'''def avatar(request):
+def avatar(request):
     if request.method == "POST":
         print("avatar - POST")
         formulario = AvatarFormulario(request.POST, request.FILES)
@@ -232,5 +244,4 @@ def avatar (request):
                 request.session['avatar_url'] = avatar.image.url
             return redirect('index')
     formulario = AvatarFormulario()
-    return render(request, 'usuario_avatar.html', {"form": formulario})'''
-
+    return render(request, 'usuario_avatar.html', {"form": formulario})

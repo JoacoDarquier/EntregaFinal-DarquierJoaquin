@@ -36,7 +36,11 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'avatar' %}">Cambiar Imagen</a></li>
-                            <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesion</a></li>
+                            <form method="post" action="{% url 'Logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">Cerrar sesión</button>
+                            </form>
+                            
                         </ul> 
                     </li>
                 </div>
@@ -48,7 +52,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{% url 'avatar' %}">Cambiar Imagen</a></li>
-                            <li><a class="dropdown-item" href="{% url 'Logout' %}">Cerrar Sesion</a></li>
+                            <form method="post" action="{% url 'Logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">Cerrar sesión</button>
+                            </form>
                         </ul> 
                     </li>
                 </div>

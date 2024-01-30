@@ -1,10 +1,15 @@
 {% extends 'index.html' %} 
 {% load static %} 
 {% block cambioDeVista %}
-<form action="{% url 'avatar' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-    <table>
-        {{formulario.as_p}}
-    </table>
-    <input type="submit" value="Enviar">
-</form>
+<div class="container mt-5">
+    <!-- Utiliza la clase 'row' para una fila y 'col-md-6' para un ancho de columna medio -->
+    <form action="{% url 'avatar' %}" method="post" enctype="multipart/form-data" class="col-md-12">
+        {% csrf_token %}
+        <!-- Utiliza clases de Bootstrap para estilizar la tabla -->
+        <table class="table-dark mx-auto w-auto">
+            {{ form.as_table }}
+        </table>
+        <!-- Utiliza la clase 'btn' y 'btn-primary' para estilizar el botón -->
+    </form>
+</div>
 {% endblock %}

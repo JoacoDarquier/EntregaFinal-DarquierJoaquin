@@ -30,7 +30,7 @@ from app.views import (
 urlpatterns = [
     path('registrar/', registrar, name = "registrar"),
     path('login/', login_request, name = 'login'),
-    path('logout/', LogoutView.as_view(template_name="index.html"), name = "Logout"),
+    path('logout/', LogoutView.as_view(template_name="logout.html"), name = "Logout"),
     #CRUD Arquero
     path('arquero/list', ArqueroList.as_view(), name = 'ArqueroList'),
     path('crear-arquero/', ArqueroCreacion.as_view(), name = 'ArqueroCreacion'),
