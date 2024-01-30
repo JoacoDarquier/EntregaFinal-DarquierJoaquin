@@ -66,6 +66,10 @@ class ArqueroCreacion (LoginRequiredMixin, CreateView):
     template_name = 'create_arquero.html'
     success_url = "/yo-jugador/arquero/list"
 
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
+
 '''def arquero_create(request):
     if request.method == 'POST':
         form = ArqueroFormulario(request.POST, request.FILES)

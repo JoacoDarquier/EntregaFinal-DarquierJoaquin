@@ -11,9 +11,9 @@
                     <h5 class="card-title">{{arquero.nombre}} {{arquero.apellido}}</h5>
                     <p class="card-text">Aca va la descripcion</p>
                     <a type="button" class="btn btn-info" href="{% url 'ArqueroDetalle' arquero.id %}">Ver</a>
-                    {% if usuario.id == arquero.usuario.id %}
-                    <a type="button" class="btn btn-primary" href="{% url 'ArqueroEditar' arquero.id %}">Editar</a>
-                    <a type="button" class="btn btn-danger" href="{% url 'ArqueroDelete' arquero.id %}">Borrar</a>
+                    {% if user.id == arquero.usuario.id %}
+                        <a type="button" class="btn btn-primary" href="{% url 'ArqueroEditar' arquero.id %}">Editar</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'ArqueroDelete' arquero.id %}">Borrar</a>
                     {% endif %}
                 </div>
             </div>
@@ -21,5 +21,8 @@
         {% endfor %}
     </div>
 </div>
-<a type="button" href="{% url 'ArqueroCreacion' %}">Crear</a>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <a class="btn btn-primary" type="submit" href="{% url 'ArqueroCreacion' %}">Crear</a>
+</div>
+<br>
 {% endblock %}
