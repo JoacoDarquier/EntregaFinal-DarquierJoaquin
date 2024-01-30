@@ -10,7 +10,7 @@
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light static-top">
+        <nav class="nav">
             {% if request.user.is_authenticated %}
             <a class="nav-link" href="{% url 'ArqueroList' %}">Arquero</a>
             <a class="nav-link" href="{% url 'DefensorList' %}">Defensor</a>
@@ -29,27 +29,60 @@
                 </button>
             </form>
             {% else %}
-            <div class="container">
+            <div class="navbar bg-body-tertiary col-md-2">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://images.vexels.com/media/users/3/158409/isolated/preview/b0af06a4c1a8e7a31ce379250130d26c-pelota-de-futbol-pentagono-silueta.png" alt="Boton de inicio" width="30" height="30" class="d-inline-block align-text-top">
+                        YO JUGADOR
+                    </a>
+                </div>
+            </div>
+            <div class="navbar navbar-expand-lg justify-content-center col-md-9">
                 <a class="nav-link" href="{% url 'login' %}">Arquero</a>
                 <a class="nav-link" href="{% url 'login' %}">Defensor</a>
                 <a class="nav-link" href="{% url 'login' %}">Mediocampista</a>
                 <a class="nav-link" href="{% url 'login' %}">Delantero</a>
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Acceder
-                        </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesion</a>
-                            <a class="btn btn-primary" href="{% url 'registrar' %}">Registrarse</a>
-                        </div>
-                    </div>
+            </div>
+            <div class="navbar navbar-expand-lg bg-body-tertiary col-md-1 accordion accordion-flush" id="accordionFlushExample">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Acceder
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesion</a></li>
+                        <li><a class="dropdown-item" href="{% url 'registrar' %}">Registrarse</a></li>
+                    </ul> 
+                </li>
+            </div>
+        </nav>
+        <h1 class="text-center">Ultimas noticias del mercado de pases</h1>
+        <div class="card-group row">
+            <div class="card border-primary mb-3">
+                <img src="https://media.tycsports.com/files/2024/01/29/669630/ignacio-miramon_862x485.webp?v=1" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Boca averiguó la situación de Ignacio Miramón en Lille</h5>
+                    <p class="card-text">El Xeneize aún no se retira del mercado de pases y quiere incorporar a un mediocampista más. Desde Francia le contestaron que prefieren quedarse con el ex-Gimnasia y, en todo caso, cederlo a algún equipo de Europa...</p>
+                    <a class="dropdown-item" target="_blank" href="https://www.tycsports.com/boca-juniors/boca-consulto-condiciones-situacion-ignacio-miramon-lille-francia-id561203.html">Leer mas</a>
                 </div>
             </div>
-            {% endif %} 
-        </nav>
+            <div class="card border-primary mb-3">
+                <img src="https://media.tycsports.com/files/2024/01/29/669595/villagra-y-fassi_862x485.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">El ultimátum que Villagra le habría dado a Fassi: "Si no me vendés a River, nos tenemos que agarrar a piñas"</h5>
+                    <p class="card-text">El mediocampista de la T plantó bandera fuertemente y quiere ir a jugar al club de sus amores. El presidente del cuadro cordobés se mantiene firme en sus pretensiones...</p>
+                    <a class="dropdown-item" target="_blank" href="https://www.tycsports.com/river-plate/villagra-fassi-talleres-venta-river-frase-agarrar-a-pinas-id561194.html">Leer mas</a>
+                </div>
+            </div>
+            <div class="card border-primary mb-3">
+                <img src="https://media.tycsports.com/files/2024/01/26/668739/luciano-rodriguez_862x485.webp?v=3" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Liverpool rechazó la oferta de River por Luciano Rodríguez: cómo sigue la negociación</h5>
+                    <p class="card-text">El conjunto charrúa descartó el ofrecimiento del Millonario que está lejos de sus pretenciones, aunque en Núñez no se bajan de la pelea. También desecharon una propuesta del Feyenoord...</p>
+                    <a class="dropdown-item" target="_blank" href="https://www.tycsports.com/river-plate/river-rechazo-propuesta-liverpool-luciano-rodriguez-uruguay-id560797.html">Leer mas</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         {% block cambioDeVista %}
         {% endblock %}
         <footer class="p-5 bg-dark text-white text-center position-relative">
