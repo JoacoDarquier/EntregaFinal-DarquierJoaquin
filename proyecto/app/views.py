@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 
 from app.models import Arquero, Defensor, Mediocampista, Delantero, Avatar 
 
-from app.forms import UserRegistrationForm, AvatarFormulario, ArqueroFormulario
+from app.forms import UserRegistrationForm, AvatarFormulario, ArqueroFormulario, UserEditForm
 
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -245,3 +245,20 @@ def avatar(request):
             return redirect('index')
     formulario = AvatarFormulario()
     return render(request, 'usuario_avatar.html', {"form": formulario})
+
+@login_required
+def editar_perfil (request):
+    usuario = request.user
+    if request.method == 'POST':
+        formulario = UserEditForm(request.POST)
+        if formulario.is_valid():
+            informacion = formulario.cleaned_data
+            usuario.email = informacion.get('email')
+            usuario.password1 = informacion.get('password1')
+            usuario.password2 = informacion.get('password2')
+            usuario.last_name = informacion.get('last_name')
+            usuario.first_name = informacion.get('first_name')
+            usuario.save()
+            return render(request, 'index.html') 
+    formulario = UserEditForm(initial={'email' : usuario.email})
+    return render(request, 'editar_perfil.html', {'formulario' : formulario, 'usuario' : usuario})

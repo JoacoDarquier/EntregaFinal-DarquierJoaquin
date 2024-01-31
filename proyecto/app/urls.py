@@ -3,6 +3,7 @@ from django.contrib.auth.views import LogoutView
 from app.views import (
     registrar,
     login_request,
+    editar_perfil,
     ArqueroList,
     ArqueroCreacion,
     ArqueroDetalle,
@@ -31,6 +32,7 @@ urlpatterns = [
     path('registrar/', registrar, name = "registrar"),
     path('login/', login_request, name = 'login'),
     path('logout/', LogoutView.as_view(template_name="logout.html"), name = "Logout"),
+    path('editar_perfil/', editar_perfil, name = "editar_perfil"),
     #CRUD Arquero
     path('arquero/list', ArqueroList.as_view(), name = 'ArqueroList'),
     path('crear-arquero/', ArqueroCreacion.as_view(), name = 'ArqueroCreacion'),

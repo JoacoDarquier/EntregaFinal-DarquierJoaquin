@@ -57,3 +57,14 @@ class UserRegistrationForm (UserCreationForm):
 
 class AvatarFormulario(forms.Form):
     image = forms.ImageField()
+
+class UserEditForm (UserCreationForm):
+    email = forms.EmailField()
+    password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Repita contraseña", widget=forms.PasswordInput)
+    last_name = forms.CharField()
+    first_name = forms.CharField()
+
+    class Meta:
+        model = User
+        fields = ['email', 'password1', 'password2', 'last_name', 'first_name']
