@@ -15,6 +15,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.core.exceptions import PermissionDenied
+from django.contrib import messages
 
 
 
@@ -36,22 +37,22 @@ def registrar(request):
 
 def login_request(request):
     if request.method == "POST":
-        form = AuthenticationForm(request, data = request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-
             user = authenticate(username=username, password=password)
-            
             if user is not None:
                 login(request, user)
-                return render(request, 'index.html', {"mensaje": f"Bienvenido {username}"})
+                avatar = Avatar.objects.get_or_create(user=user)[0]
+                avatar = Avatar.objects.get_or_create(user=user)[0]
+                if avatar.image:
+                    request.session['avatar_url'] = avatar.image.url   
+                return redirect('index')
             else:
-                return render(request, 'index.html', {"mensaje": "Usuario o contraseña invalidos"})
-            
+                messages.error(request, 'Datos incorrectos')
         else:
-            return render (request,"index.html", {"mensaje": "Datos form incorrectos"})
-
+            messages.error(request, 'Datos incorrectos')         
     form = AuthenticationForm()
     return render(request, "login.html", {"form": form})
 
@@ -126,6 +127,7 @@ class DefensorDetalle (LoginRequiredMixin, DetailView):
 class DefensorDelete (LoginRequiredMixin, DeleteView):
     model = Defensor
     template_name = 'defensor_confirm_delete.html'
+    success_url = "/yo-jugador/defensor/list"
 
 class DefensorEditar (LoginRequiredMixin, UpdateView):
     model = Defensor
@@ -162,6 +164,7 @@ class MediocampistaDetalle (LoginRequiredMixin, DetailView):
 class MediocampistaDelete (LoginRequiredMixin, DeleteView):
     model = Mediocampista
     template_name = 'mediocampista_confirm_delete.html'
+    success_url = "/yo-jugador/mediocampista/list"
 
 class MediocampistaEditar (LoginRequiredMixin, UpdateView):
     model = Mediocampista
@@ -198,6 +201,7 @@ class DelanteroDetalle (LoginRequiredMixin, DetailView):
 class DelanteroDelete (LoginRequiredMixin, DeleteView):
     model = Delantero
     template_name = 'delantero_confirm_delete.html'
+    success_url = "/yo-jugador/delantero/list"
 
 class DelanteroEditar (LoginRequiredMixin, UpdateView):
     model = Delantero

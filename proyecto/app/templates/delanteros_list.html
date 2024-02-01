@@ -11,9 +11,9 @@
                     <h5 class="card-title">{{delantero.nombre}} {{delantero.apellido}}</h5>
                     <p class="card-text">Aca va la descripcion</p>
                     <a type="button" class="btn btn-info" href="{% url 'DelanteroDetalle' delantero.id %}">Ver</a>
-                    {% if usuario.id == delantero.usuario.id %}
-                    <a type="button" class="btn btn-primary" href="{% url 'DelanteroEditar' delantero.id %}">Editar</a>
-                    <a type="button" class="btn btn-danger" href="{% url 'DelanteroDelete' delantero.id %}">Borrar</a>
+                    {% if user.id == delantero.usuario.id %}
+                        <a type="button" class="btn btn-primary" href="{% url 'DelanteroEditar' delantero.id %}">Editar</a>
+                        <a type="button" class="btn btn-danger" href="{% url 'DelanteroDelete' delantero.id %}">Borrar</a>
                     {% endif %}
                 </div>
             </div>
