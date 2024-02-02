@@ -1,6 +1,22 @@
 {% extends 'index.html' %} 
 {% load static %} 
 {% block cambioDeVista %}
-<p>Nombre del Delantero: {{delantero.nombre}} </p>
-<a href="{% url 'DelanteroList' %}">Regresar</a>
+<h2>Delantero</h2>
+<div class="container-fluid">
+    <li>Nombre: {{delantero.nombre}} </li>
+    <li>Apellido: {{delantero.apellido}} </li>
+    <li>Pie Habil: {{delantero.pie_habil}} </li>
+    <li>Clubes Anteriores: {{delantero.cant_clubes_anteriores}} </li>
+    <li>Estatura: {{delantero.estatura}} </li>
+    <li>Fecha de Nacimento: {{delantero.fecha_nacimiento}} </li>
+</div>
+<h4>Contacto:</h4>
+<div class="container-fluid">
+    <li>Telefono: {{delantero.telefono}} </li>
+    <li>Correo Elctronico: {{delantero.email}} </li>
+    <li>Representado por: {{delantero.usuario}}</li> 
+</div>
+<div class="center">
+    <a href="{% url 'DelanteroList' %}">Regresar</a>
+</div>
 {% endblock %}

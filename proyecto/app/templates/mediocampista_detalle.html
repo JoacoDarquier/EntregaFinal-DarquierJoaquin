@@ -1,6 +1,22 @@
 {% extends 'index.html' %} 
 {% load static %} 
 {% block cambioDeVista %}
-<p>Nombre del Mediocampista: {{mediocampista.nombre}} </p>
-<a href="{% url 'MediocampistaList' %}">Regresar</a>
+<h2>Mediocampista</h2>
+<div class="container-fluid">
+    <li>Nombre: {{mediocampista.nombre}} </li>
+    <li>Apellido: {{mediocampista.apellido}} </li>
+    <li>Pie Habil: {{mediocampista.pie_habil}} </li>
+    <li>Clubes Anteriores: {{mediocampista.cant_clubes_anteriores}} </li>
+    <li>Estatura: {{mediocampista.estatura}} </li>
+    <li>Fecha de Nacimento: {mediocampistao.fecha_nacimiento}} </li>
+</div>
+<h4>Contacto:</h4>
+<div class="container-fluid">
+    <li>Telefono: {{mediocampista.telefono}} </li>
+    <li>Correo Elctronico: {{mediocampista.email}} </li>
+    <li>Representado por: {{mediocampista.usuario}}</li> 
+</div>
+<div class="center">
+    <a href="{% url 'MediocampistaList' %}">Regresar</a>
+</div>
 {% endblock %}
