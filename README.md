@@ -36,3 +36,5 @@ Nota: La opcion de editar y eliminar jugador solamente la puede ver y ejecutarla
 - Django 5.0
 
 # Video demostrativo
+
+[Link del video](https://youtu.be/xIA6eF1NCjs)
