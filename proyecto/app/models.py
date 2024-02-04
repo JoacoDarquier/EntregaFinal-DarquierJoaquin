@@ -16,6 +16,8 @@ class Jugador (models.Model):
     estatura = models.FloatField()
     email = models.EmailField()
     fecha_nacimiento = models.DateTimeField(default=calcular_fecha_nacimiento_predeterminada)
+    descripcion = models.CharField(max_length=300)
+    foto_perfil = models.ImageField(upload_to = 'avatares', null = True, blank = True)
 
     class Meta:
         abstract = True
@@ -24,17 +26,16 @@ class Jugador (models.Model):
         return f"{self.nombre}, {self.apellido}"
 
 class Arquero (Jugador):
-    descripcion = models.CharField(max_length=300)
-    
+    pass
 
 class Defensor (Jugador):
-    descripcion = models.CharField(max_length=300)
+    pass
 
 class Mediocampista (Jugador):
-    descripcion = models.CharField(max_length=300)
+    pass
 
 class Delantero (Jugador):
-    descripcion = models.CharField(max_length=300)
+    pass
 
 class Avatar (models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)

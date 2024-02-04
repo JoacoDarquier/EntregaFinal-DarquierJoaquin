@@ -63,7 +63,7 @@ class ArqueroList (LoginRequiredMixin, ListView):
 
 class ArqueroCreacion (LoginRequiredMixin, CreateView):
     model = Arquero
-    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento', 'descripcion', 'foto_perfil']
     template_name = 'create_arquero.html'
     success_url = "/yo-jugador/arquero/list"
 
@@ -112,7 +112,7 @@ class DefensorList (LoginRequiredMixin, ListView):
 
 class DefensorCreacion (LoginRequiredMixin, CreateView):
     model = Defensor
-    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento', 'descripcion', 'foto_perfil']
     template_name = 'defensor_create.html'
     success_url = "/yo-jugador/defensor/list"
 
@@ -149,7 +149,7 @@ class MediocampistaList (LoginRequiredMixin, ListView):
 
 class MediocampistaCreacion (LoginRequiredMixin, CreateView):
     model = Mediocampista
-    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento', 'descripcion', 'foto_perfil']
     template_name = 'mediocampista_create.html'
     success_url = "/yo-jugador/mediocampista/list"
 
@@ -186,7 +186,7 @@ class DelanteroList (LoginRequiredMixin, ListView):
 
 class DelanteroCreacion (LoginRequiredMixin, CreateView):
     model = Delantero
-    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento']
+    fields = ['nombre', 'apellido', 'pie_habil', 'cant_clubes_anteriores', 'telefono', 'estatura', 'email', 'fecha_nacimiento', 'descripcion', 'foto_perfil']
     template_name = 'delantero_create.html'
     success_url = "/yo-jugador/delantero/list"
 
@@ -266,3 +266,4 @@ def editar_perfil (request):
             return render(request, 'index.html') 
     formulario = UserEditForm(initial={'email' : usuario.email})
     return render(request, 'editar_perfil.html', {'formulario' : formulario, 'usuario' : usuario})
+

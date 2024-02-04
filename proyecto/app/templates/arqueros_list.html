@@ -6,10 +6,14 @@
         {% for arquero in object_list %}
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                {% if arquero.foto_perfil %}
+                    <img src="{{ arquero.foto_perfil.url }}" alt="Foto de perfil de {{ arquero.nombre }}">
+                {% else %}
+                    <p>No hay foto de perfil disponible.</p>
+                {% endif %}
                 <div class="card-body text-center">
                     <h5 class="card-title">{{arquero.nombre}} {{arquero.apellido}}</h5>
-                    <p class="card-text">Aca va la descripcion</p>
+                    <p class="card-text">{{arquero.descripcion}}</p>
                     <a type="button" class="btn btn-info" href="{% url 'ArqueroDetalle' arquero.id %}">Ver</a>
                     {% if user.id == arquero.usuario.id %}
                         <a type="button" class="btn btn-primary" href="{% url 'ArqueroEditar' arquero.id %}">Editar</a>

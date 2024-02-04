@@ -6,7 +6,11 @@
         {% for mediocampista in object_list %}
         <div class="col-md-4 mb-3">
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                {% if mediocampista.foto_perfil %}
+                    <img src="{{ mediocampista.foto_perfil.url }}" alt="Foto de perfil de {{ mediocampista.nombre }}">
+                {% else %}
+                    <p>No hay foto de perfil disponible.</p>
+                {% endif %}
                 <div class="card-body text-center">
                     <h5 class="card-title">{{mediocampista.nombre}} {{mediocampista.apellido}}</h5>
                     <p class="card-text">Aca va la descripcion</p>
